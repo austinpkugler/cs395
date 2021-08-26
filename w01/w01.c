@@ -16,11 +16,12 @@ int main(int argc, char *argv[])
 {
    if (argc < 3)
    {
-      printf("Enter at least two elements, separated by spaces.\n");
+      printf("Enter at least two elements.\n");
       return 0;
    }
    int arr[argc - 1];
-   for (int i = 1; i < argc; ++i)
+   int i;
+   for (i = 1; i < argc; ++i)
    {
       arr[i - 1] = atoi(argv[i]);
    }
@@ -35,9 +36,11 @@ int main(int argc, char *argv[])
 int MinDistance(int size, int arr[])
 {
    int dmin = abs(arr[0] - arr[1]);
-   for (int i = 0; i < size; ++i)
+   int i;
+   for (i = 0; i < size; ++i)
    {
-      for (int j = 0; j < size; ++j)
+      int j;
+      for (j = 0; j < size; ++j)
       {
          int diff = abs(arr[i] - arr[j]);
          if (i != j && diff < dmin)
