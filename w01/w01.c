@@ -25,13 +25,13 @@ int main(int argc, char *argv[])
 
 int MinDistance(int size, int arr[])
 {
-    int dmin = 9999;
+    int dmin = -1;
     for (int i = 0; i < size; ++i)
     {
         for (int j = 0; j < size; ++j)
         {
             int diff = abs(arr[i] - arr[j]);
-            if (i != j && diff < dmin)
+            if ((i != j && diff < dmin) || dmin == -1)
             {
                 dmin = diff;
             }
