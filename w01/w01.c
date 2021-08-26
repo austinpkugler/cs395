@@ -1,9 +1,11 @@
-/*
+/*********************************************
+ * Id: kugl5443
+ *
  * Name: Austin Kugler
  * Assignment: W01
  * Simple functionality for calculating the minimum distance betweeen
  * any two elements in an array.
-*/
+ *********************************************/
 #include <stdio.h>
 #include <stdlib.h>
 
