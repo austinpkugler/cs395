@@ -10,6 +10,9 @@
 
 int twoToN(int n);
 
+/*
+ * Accepts command line argument to raise 2 to the power of.
+ */
 int main(int argc, char *argv[])
 {
    if (argc != 2)
@@ -19,10 +22,13 @@ int main(int argc, char *argv[])
    }
 
    int result = twoToN(atoi(argv[1]));
-   printf("%d", result);
+   printf("%d\n", result);
    return 0;
 }
 
+/*
+ * Returns 2^n for the passed value of n.
+ */
 int twoToN(int n)
 {
    if (n < 1)
