@@ -22,10 +22,12 @@ int main(int argc, char *argv[])
    size_t m = strlen(argv[1]); // pattern length
    size_t n = strlen(argv[2]); // text length
 
-   int positions[200];
+   // int positions[200];
 
-   int i, j, count;
-   count = 0;
+   printf("Matches found at locations: ");
+
+   int i, j;
+   // int count = 0;
    for (i = 0; i < n - m + 1; i++)
    {
       j = 0;
@@ -35,20 +37,22 @@ int main(int argc, char *argv[])
       }
       if (j == m)
       {
-         positions[count] = i;
-         positions[count + 1] = '\0';
-         count++;
+         printf("%d ", i);
+         // positions[count] = i;
+         // positions[count + 1] = '\0';
+         // count++;
       }
    }
 
-   for (i = 0; i < count; i++)
-   {
-      printf("%d", positions[i]);
-      if (i < count - 1)
-      {
-         printf(" ");
-      }
-   }
+   // printf("Matches found at locations: ");
+   // for (i = 0; i < count; i++)
+   // {
+   //    printf("%d", positions[i]);
+   //    if (i < count - 1)
+   //    {
+   //       printf(" ");
+   //    }
+   // }
    printf("\n");
 
    return 0;
