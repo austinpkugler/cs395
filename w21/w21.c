@@ -2,9 +2,9 @@
  * Id: kugl5443
  *
  * Name: Austin Kugler
- * Assignment: W07
+ * Assignment: W21
  * 
- * Solution for the cyclic Tower of Hanoi problem.
+ * Displays all permutations of an integer.
  *********************************************/
 #include <stdio.h>
 #include <stdlib.h>
