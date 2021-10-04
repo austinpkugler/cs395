@@ -1,0 +1,41 @@
+/*********************************************
+ * Id: kugl5443
+ *
+ * Name: Austin Kugler
+ * Assignment: W08
+ *
+ * Brute force search for matches in a string.
+ *********************************************/
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Accepts command line arguments as elements of an array.
+int main(int argc, char *argv[])
+{
+   if (argc != 3)
+   {
+      printf("Enter the pattern to match and then a string.\n");
+      return 0;
+   }
+
+   size_t m = strlen(argv[1]); // pattern length
+   size_t n = strlen(argv[2]); // text length
+
+   int i, j;
+   for (i = 0; i < n - m + 1; i++)
+   {
+      j = 0;
+      while (j < m && argv[1][j] == argv[2][i + j])
+      {
+         j++;
+      }
+      if (j == m)
+      {
+         printf("%d ", i);
+      }
+   }
+   printf("\n");
+
+   return 0;
+}
