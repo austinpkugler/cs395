@@ -1,10 +1,10 @@
-// /*********************************************
-//  * Id: kugl5443
-//  *
-//  * Name: Austin Kugler
-//  * Assignment: W04
-//  * Uses Gaussian elimination to solve a system of linear equations.
-//  *********************************************/
+/*********************************************
+ * Id: kugl5443
+ *
+ * Name: Austin Kugler
+ * Assignment: W04
+ * Uses Gaussian elimination to solve a system of linear equations.
+ *********************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
