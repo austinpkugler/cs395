@@ -37,6 +37,7 @@ int main(int argc, char *argv[])
 // Performs Gaussian Elimination on a matrix.
 void GE(float elements[], int n)
 {
+   // Move the elements into a 2D array to represent the matrix.
    float A[n][n + 1];
    int row = 0, col = 0, offset = 0;
 
@@ -62,7 +63,7 @@ void GE(float elements[], int n)
    }
    printf("\n");
 
-   // Gaussian elimination
+   // Start Gaussian elimination
    float tempji;
 
    int i, j, k;
