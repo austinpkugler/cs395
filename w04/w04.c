@@ -9,8 +9,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-void printMatrix(float matrix[], int n);
-void GE(float matrix[], int n);
+void GE(float elements[], int n);
 
 // Accepts command line arguments for matrix values.
 int main(int argc, char *argv[])
@@ -23,35 +22,20 @@ int main(int argc, char *argv[])
 
    int n = atoi(argv[1]);
 
-   float matrix[n * (n + 1)];
+   float elements[n * (n + 1)];
    int i;
    for (i = 2; i < argc; i++)
    {
-      matrix[i - 2] = atof(argv[i]);
+      elements[i - 2] = atof(argv[i]);
    }
 
-   GE(matrix, n);
+   GE(elements, n);
 
    return 0;
 }
 
-// Prints an array in matrix form.
-void printMatrix(float matrix[], int n)
-{
-   int i;
-   for (i = 0; i < n * (n + 1); i++)
-   {
-      if (i && i % (n + 1) == 0)
-      {
-         printf("\n");
-      }
-      printf("%.2f ", matrix[i]);
-   }
-   printf("\n");
-}
-
 // Performs Gaussian Elimination on a matrix.
-void GE(float matrix[], int n)
+void GE(float elements[], int n)
 {
    float A[n][n + 1];
    int row = 0, col = 0, offset = 0;
@@ -61,7 +45,7 @@ void GE(float matrix[], int n)
       for (offset = row * (n + 1); offset < row * (n + 1) + (n + 1); offset++)
       {
          col = offset - (row * (n + 1));
-         A[row][col] = matrix[offset];
+         A[row][col] = elements[offset];
       }
       row++;
    }
@@ -82,12 +66,12 @@ void GE(float matrix[], int n)
    float tempji;
 
    int i, j, k;
-   for (i = 0; i < n - 2; i++)
+   for (i = 0; i < n - 1; i++)
    {
-      for (j = i + 1; j < n - 1; j++)
+      for (j = i + 1; j < n; j++)
       {
          tempji = A[j][i];
-         for (k = i; k < n; k++)
+         for (k = i; k < n + 1; k++)
          {
             A[j][k] = A[j][k] - (A[i][k] * tempji / A[i][i]);
          }
