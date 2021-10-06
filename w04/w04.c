@@ -79,15 +79,15 @@ void GE(float elements[], int n)
 
          // Print the matrix
          int y, z;
-         for (y = 0; y < n; y++)
+      }
+      for (y = 0; y < n; y++)
+      {
+         for (z = 0; z < n + 1; z++)
          {
-            for (z = 0; z < n + 1; z++)
-            {
-               printf("%.2f ", A[y][z]);
-            }
-            printf("\n");
+            printf("%.2f ", A[y][z]);
          }
          printf("\n");
       }
+      printf("\n");
    }
 }
