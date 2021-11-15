@@ -19,6 +19,29 @@ int hoarePartition(int array[], int left, int right);
 void printArray(int array[], int left, int right, int size);
 void swap(int *a, int *b);
 
+// Accepts command line arguments as elements of an array.
+int main(int argc, char *argv[])
+{
+   if (argc < 3)
+   {
+      printf("Enter integer elements of an array separated by spaces.\n");
+      return 0;
+   }
+
+   int size = argc - 1;
+   int array[size];
+   int i;
+   for (i = 1; i < argc; i++)
+   {
+      array[i - 1] = atoi(argv[i]);
+   }
+
+   quicksort(array, 0, size - 1, size);
+   printArray(array, 0, size - 1, size);
+
+   return 0;
+}
+
 // Sorts an array using the quicksort algorithm.
 void quicksort(int array[], int left, int right, int size)
 {
@@ -87,27 +110,4 @@ void swap(int *a, int *b)
    temp = *a;
    *a = *b;
    *b = temp;
-}
-
-// Accepts command line arguments as elements of an array.
-int main(int argc, char *argv[])
-{
-   if (argc < 3)
-   {
-      printf("Enter integer elements of an array separated by spaces.\n");
-      return 0;
-   }
-
-   int size = argc - 1;
-   int array[size];
-   int i;
-   for (i = 1; i < argc; i++)
-   {
-      array[i - 1] = atoi(argv[i]);
-   }
-
-   quicksort(array, 0, size - 1, size);
-   printArray(array, 0, size - 1, size);
-
-   return 0;
 }
