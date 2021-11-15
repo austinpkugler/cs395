@@ -3,8 +3,7 @@
  *
  * Name: Austin Kugler
  * Assignment: W04
- *
- * Gaussian Elimination
+ * Uses Gaussian elimination to solve a system of linear equations.
  *********************************************/
 #include <stdio.h>
 #include <stdlib.h>
@@ -77,10 +76,8 @@ void GE(float elements[], int n)
          {
             A[j][k] = A[j][k] - (A[i][k] * tempji / A[i][i]);
          }
-
-         // Print the matrix
-         int y, z;
       }
+      // Print the matrix
       for (y = 0; y < n; y++)
       {
          for (z = 0; z < n + 1; z++)
