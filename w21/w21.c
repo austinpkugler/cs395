@@ -4,7 +4,7 @@
  * Name: Austin Kugler
  * Assignment: W21
  * 
- * Displays all permutations of an integer.
+ * Integer Permutations
  *********************************************/
 #include <stdio.h>
 #include <stdlib.h>

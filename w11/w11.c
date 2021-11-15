@@ -2,9 +2,9 @@
  * Id: kugl5443
  *
  * Name: Austin Kugler
- * Assignment: W10
+ * Assignment: W11
  *
- * Implementation of insertion sort.
+ * Insertion Sort
  *********************************************/
 #include <stdio.h>
 #include <stdlib.h>

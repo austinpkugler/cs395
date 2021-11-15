@@ -2,17 +2,20 @@
  * Id: kugl5443
  *
  * Name: Austin Kugler
- * Assignment: W10
+ * Assignment: W__
  *
- * Implementation of insertion sort.
+ * Summary
  *********************************************/
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/time.h>
+#include <time.h>
+#include <unistd.h>
 
 void printArray(int array[], int size);
 void swap(int *a, int *b);
-void insertionSort(int array[], int size);
 
 // Accepts command line arguments as elements of an array.
 int main(int argc, char *argv[])
@@ -29,9 +32,6 @@ int main(int argc, char *argv[])
    {
       array[i - 1] = atoi(argv[i]);
    }
-
-   insertionSort(array, argc - 1);
-
    return 0;
 }
 
@@ -46,31 +46,11 @@ void printArray(int array[], int size)
    printf("\n");
 }
 
-// Swaps two elements.
+// Swaps two elements of an array with each other.
 void swap(int *a, int *b)
 {
    int temp;
    temp = *a;
    *a = *b;
    *b = temp;
-}
-
-// Sorts an array of integers using insertion sort.
-void insertionSort(int array[], int size)
-{
-   printArray(array, size);
-
-   int i, j;
-   for (i = 1; i < size; i++)
-   {
-      int v = array[i];
-      j = i - 1;
-      while (j >= 0 && array[j] > v)
-      {
-         array[j + 1] = array[j];
-         j = j - 1;
-      }
-      array[j + 1] = v;
-      printArray(array, size);
-   }
 }

@@ -2,9 +2,9 @@
  * Id: kugl5443
  *
  * Name: Austin Kugler
- * Assignment: W05
+ * Assignment: W06
  * 
- * Solution for the restricted Tower of Hanoi problem.
+ * Restricted Tower of Hanoi
  *********************************************/
 #include <stdio.h>
 #include <stdlib.h>

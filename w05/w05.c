@@ -3,8 +3,8 @@
  *
  * Name: Austin Kugler
  * Assignment: W05
- * 
- * Solution for the Tower of Hanoi problem.
+ *
+ * Tower of Hanoi
  *********************************************/
 #include <stdio.h>
 #include <stdlib.h>

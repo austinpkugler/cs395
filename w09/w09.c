@@ -3,8 +3,8 @@
  *
  * Name: Austin Kugler
  * Assignment: W09
- *
- * Implementation of selection sort.
+ * 
+ * Selection Sort
  *********************************************/
 #include <stdio.h>
 #include <stdlib.h>

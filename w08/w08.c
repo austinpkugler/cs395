@@ -3,8 +3,8 @@
  *
  * Name: Austin Kugler
  * Assignment: W08
- *
- * Brute force search for matches in a string.
+ * 
+ * Brute Force String Matching
  *********************************************/
 #include <stdio.h>
 #include <stdlib.h>

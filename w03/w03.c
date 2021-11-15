@@ -3,7 +3,8 @@
  *
  * Name: Austin Kugler
  * Assignment: W03
- * Calcuates the value of 2^n for the given n argument.
+ *
+ * 2^n Brute Force
  *********************************************/
 #include <stdio.h>
 #include <stdlib.h>
