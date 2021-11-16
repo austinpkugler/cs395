@@ -96,7 +96,7 @@ void printArray(int array[], int left, int right, int size)
       printf("%d", array[i]);
       if (i == right)
       {
-         printf("]");
+         printf("] ");
       }
       printf(" ");
    }
