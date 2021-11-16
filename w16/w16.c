@@ -120,7 +120,9 @@ Point *convexHull(Point points[], int pointsSize, int *hullSize)
    for (i = 0; i < pointsSize; ++i)
    {
       while (count >= 2 && !isSide(&hull[count - 2], &hull[count - 1], &points[i]))
+      {
          --count;
+      }
       if (count == maxHull)
       {
          maxHull *= 2;
@@ -134,7 +136,9 @@ Point *convexHull(Point points[], int pointsSize, int *hullSize)
    for (i = pointsSize - 1; i >= 0; i--)
    {
       while (count >= t && !isSide(&hull[count - 2], &hull[count - 1], &points[i]))
+      {
          --count;
+      }
       if (count == maxHull)
       {
          maxHull *= 2;
