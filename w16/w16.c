@@ -6,73 +6,91 @@
  *
  * Quick Hull Algorithm
  *********************************************/
-#include <assert.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct tPoint
+typedef struct Point
 {
    int x, y;
 } Point;
 
-bool ccw(const Point *a, const Point *b, const Point *c)
+int isSide(const Point *a, const Point *b, const Point *c);
+int comparePoints(const void *left, const void *right);
+void printHull(const Point *points, int size);
+Point *convexHull(Point points[], int size, int *hullSize);
+
+// Accepts command line arguments as elements of an array.
+int main(int argc, char *argv[])
+{
+   int pointsSize = (argc - 1) / 2;
+   Point points[pointsSize];
+
+   int i;
+   int currPoint = 0;
+   for (i = 1; i < argc - 1; i++)
+   {
+      if (i % 2 != 0)
+      {
+         points[currPoint].x = atoi(argv[i]);
+         points[currPoint].y = atoi(argv[i + 1]);
+         currPoint++;
+      }
+   }
+
+   int hullSize;
+   Point *hull = convexHull(points, sizeof(points) / sizeof(Point), &hullSize);
+   printf("The points in Convex Hull are:\n");
+   printHull(hull, hullSize);
+   printf("\n");
+   free(hull);
+
+   return 0;
+}
+
+// Checks if a point is part of the side/edge.
+int isSide(const Point *a, const Point *b, const Point *c)
 {
    return (b->x - a->x) * (c->y - a->y) > (b->y - a->y) * (c->x - a->x);
 }
 
-int comparePoints(const void *lhs, const void *rhs)
+// Compares two points to see which is furthest.
+int comparePoints(const void *left, const void *right)
 {
-   const Point *lp = lhs;
-   const Point *rp = rhs;
-   if (lp->x < rp->x)
+   const Point *leftPoint = left;
+   const Point *rightPoint = right;
+
+   // Check x coord
+   if (leftPoint->x < rightPoint->x)
+   {
       return -1;
-   if (rp->x < lp->x)
+   }
+
+   if (rightPoint->x < leftPoint->x)
+   {
       return 1;
-   if (lp->y < rp->y)
+   }
+
+   // Check y coord
+   if (leftPoint->y < rightPoint->y)
+   {
       return -1;
-   if (rp->y < lp->y)
+   }
+
+   if (rightPoint->y < leftPoint->y)
+   {
       return 1;
+   }
+
    return 0;
 }
 
-void fatal(const char *message)
+// Displays the points in the hull.
+void printHull(const Point *points, int pointsSize)
 {
-   fprintf(stderr, "%s\n", message);
-   exit(1);
-}
-
-void *xmalloc(size_t n)
-{
-   void *ptr = malloc(n);
-   if (ptr == NULL)
-      fatal("Out of memory");
-   return ptr;
-}
-
-void *xrealloc(void *p, size_t n)
-{
-   void *ptr = realloc(p, n);
-   if (ptr == NULL)
-      fatal("Out of memory");
-   return ptr;
-}
-
-void printPoints(const Point *points, int len)
-{
-   // if (len > 0)
-   // {
-   //    const Point *ptr = points;
-   //    const Point *end = points + len;
-   //    printf("(%d, %d)", ptr->x, ptr->y);
-   //    ++ptr;
-   //    for (; ptr < end; ++ptr)
-   //       printf(" (%d, %d)", ptr->x, ptr->y);
-   // }
-   if (len > 0)
+   if (pointsSize > 0)
    {
-      const Point *ptr = points + len;
-      const Point *first = points + len;
+      const Point *ptr = points + pointsSize;
+      const Point *first = points + pointsSize;
       const Point *end = points;
       printf("(%d, %d)", ptr->x, ptr->y);
       --ptr;
@@ -84,80 +102,49 @@ void printPoints(const Point *points, int len)
    }
 }
 
-Point *convexHull(Point p[], int len, int *hsize)
+// Computes the convex hull.
+Point *convexHull(Point points[], int pointsSize, int *hullSize)
 {
-   if (len == 0)
+   if (pointsSize == 0)
    {
-      *hsize = 0;
+      *hullSize = 0;
       return NULL;
    }
 
-   int i, size = 0, capacity = 4;
-   Point *hull = xmalloc(capacity * sizeof(Point));
+   int i, count = 0, maxHull = 4;
+   Point *hull = malloc(maxHull * sizeof(Point));
 
-   qsort(p, len, sizeof(Point), comparePoints);
+   qsort(points, pointsSize, sizeof(Point), comparePoints);
 
-   /* lower hull */
-   for (i = 0; i < len; ++i)
+   // First do bottom half of hull
+   for (i = 0; i < pointsSize; ++i)
    {
-      while (size >= 2 && !ccw(&hull[size - 2], &hull[size - 1], &p[i]))
-         --size;
-      if (size == capacity)
+      while (count >= 2 && !isSide(&hull[count - 2], &hull[count - 1], &points[i]))
+         --count;
+      if (count == maxHull)
       {
-         capacity *= 2;
-         hull = xrealloc(hull, capacity * sizeof(Point));
+         maxHull *= 2;
+         hull = realloc(hull, maxHull * sizeof(Point));
       }
-      assert(size >= 0 && size < capacity);
-      hull[size++] = p[i];
+      hull[count++] = points[i];
    }
 
-   /* upper hull */
-   int t = size + 1;
-   for (i = len - 1; i >= 0; i--)
+   // Then do top half of hull
+   int t = count + 1;
+   for (i = pointsSize - 1; i >= 0; i--)
    {
-      while (size >= t && !ccw(&hull[size - 2], &hull[size - 1], &p[i]))
-         --size;
-      if (size == capacity)
+      while (count >= t && !isSide(&hull[count - 2], &hull[count - 1], &points[i]))
+         --count;
+      if (count == maxHull)
       {
-         capacity *= 2;
-         hull = xrealloc(hull, capacity * sizeof(Point));
+         maxHull *= 2;
+         hull = realloc(hull, maxHull * sizeof(Point));
       }
-      assert(size >= 0 && size < capacity);
-      hull[size++] = p[i];
+      hull[count++] = points[i];
    }
 
-   --size;
-   assert(size >= 0);
-   hull = xrealloc(hull, size * sizeof(Point));
-   *hsize = size;
+   --count;
+   hull = realloc(hull, count * sizeof(Point));
+   *hullSize = count;
    return hull;
-}
-
-int main(int argc, char *argv[])
-{
-   int numPoints = (argc - 1) / 2;
-   Point points[numPoints];
-
-   int i;
-   int currPoint = 0;
-   for (i = 1; i < argc - 1; i++)
-   {
-      if (i % 2 != 0)
-      {
-         points[currPoint].x = atoi(argv[i]);
-         points[currPoint].y = atoi(argv[i + 1]);
-         // printf("%d %d\n", atoi(argv[i]), atoi(argv[i + 1]));
-         // printf("%d %d\n", points[currPoint].x, points[currPoint].y);
-         currPoint++;
-      }
-   }
-
-   int hsize;
-   Point *hull = convexHull(points, sizeof(points) / sizeof(Point), &hsize);
-   printf("The points in Convex Hull are:\n");
-   printPoints(hull, hsize);
-   printf("\n");
-   free(hull);
-
-   return 0;
 }
