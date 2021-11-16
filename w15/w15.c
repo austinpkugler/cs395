@@ -134,6 +134,7 @@ int *shiftTable(char needle[], int size)
    return table;
 }
 
+// Creates and prints the good suffix table.
 int *goodSuffixTable(char needle[], int gSuffix[], int needleSize)
 {
    int i;
