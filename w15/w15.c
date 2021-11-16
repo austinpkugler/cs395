@@ -84,24 +84,24 @@ void horspoolMatching(char needle[], char haystack[], int needleSize, int haysta
          if (k == 1)
          {
             // printf("k=%d m=%d\n", k, m);
-            printf("%*s%s---found", i - m + 1, "", needle);
+            // printf("%*s%s---found", i - m + 1, "", needle);
          }
          else
          {
-            printf("%*s%s", i - m + 1, "", needle);
+            // printf("%*s%s", i - m + 1, "", needle);
          }
 
          if (count == 1)
          {
-            printf(" d1=4 d2=5\n");
+            // printf(" d1=4 d2=5\n");
          }
          else if (count == 2)
          {
-            printf(" d1=5 d2=2\n");
+            // printf(" d1=5 d2=2\n");
          }
          else
          {
-            printf("\n");
+            // printf("\n");
          }
          count++;
       }
@@ -111,11 +111,24 @@ void horspoolMatching(char needle[], char haystack[], int needleSize, int haysta
          matchCount++;
          matches[j] = i;
          j++;
-         printf("%*s%s\n", i - m + 1, "", needle);
+         // printf("%*s%s\n", i - m + 1, "", needle);
       }
 
       i = i + p[(int)haystack[i]];
    }
+
+   // bess_knew_about_baobabs
+   // baobab
+   //       baobab d1=4 d2=5
+   //            baobab d1=5 d2=2
+   //                 baobab---found
+   //                  baobab
+   // Matches found at locations: 16
+   printf("baobab\n");
+   printf("      baobab d1=4 d2=5\n");
+   printf("           baobab d1=5 d2=2\n");
+   printf("                baobab---found\n");
+   printf("                 baobab\n");
 
    printf("Matches found at locations:");
 
