@@ -100,6 +100,7 @@ void printHull(const Point *points, int pointsSize)
       }
       printf(" (%d, %d)", first->x, first->y);
    }
+   printf(" ");
 }
 
 // Computes the convex hull.
