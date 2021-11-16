@@ -80,7 +80,17 @@ void horspoolMatching(char needle[], char haystack[], int needleSize, int haysta
 
       if (k != m)
       {
-         printf("%*s%s", i - m + 1, "", needle);
+
+         if (k == 1)
+         {
+            // printf("k=%d m=%d\n", k, m);
+            printf("%*s%s---found", i - m + 1, "", needle);
+         }
+         else
+         {
+            printf("%*s%s", i - m + 1, "", needle);
+         }
+
          if (count == 1)
          {
             printf(" d1=4 d2=5\n");
@@ -101,7 +111,7 @@ void horspoolMatching(char needle[], char haystack[], int needleSize, int haysta
          matchCount++;
          matches[j] = i;
          j++;
-         printf("%*s%s---found\n", i - m + 1, "", needle);
+         printf("%*s%s\n", i - m + 1, "", needle);
       }
 
       i = i + p[(int)haystack[i]];
