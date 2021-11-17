@@ -60,15 +60,17 @@ int robotCoinCollection(int rowSize, int colSize, int map[rowSize][colSize])
    navTable[0][0] = map[0][0];
 
    int i, j;
+
+   // Do rows
    for (i = 1; i < rowSize; i++)
    {
       // Current position is a wall
       if (map[i][0] == -1)
       {
-         navTable[i][0] = 0;
          for (i = i; i < colSize; i++)
          {
             navTable[i][0] = 0;
+            printf("(%d, %d) set to 0\n", i, 0);
          }
       }
       else
@@ -77,15 +79,16 @@ int robotCoinCollection(int rowSize, int colSize, int map[rowSize][colSize])
       }
    }
 
+   // Do columns
    for (j = 1; j < colSize; j++)
    {
       // Current position is a wall
       if (map[0][j] == -1)
       {
-         navTable[0][j] = 0;
          for (j = j; j < colSize; j++)
          {
             navTable[0][j] = 0;
+            printf("(%d, %d) set to 0\n", 0, j);
          }
       }
       else
@@ -94,6 +97,7 @@ int robotCoinCollection(int rowSize, int colSize, int map[rowSize][colSize])
       }
    }
 
+   // Navigate entire map
    for (i = 1; i < rowSize; i++)
    {
       for (j = 1; j < colSize; j++)
@@ -102,6 +106,7 @@ int robotCoinCollection(int rowSize, int colSize, int map[rowSize][colSize])
          if (map[i][j] == -1)
          {
             navTable[i][j] = 0;
+            printf("(%d, %d) set to 0\n", i, j);
          }
          else
          {
