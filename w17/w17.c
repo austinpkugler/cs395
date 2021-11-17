@@ -66,7 +66,7 @@ int robotCoinCollection(int rowSize, int colSize, int map[rowSize][colSize])
    int navTable[rowSize][colSize];
    navTable[0][0] = map[0][0];
 
-   int i = 1, j = 1, k;
+   int i = 1, j = 1;
 
    // Do rows
    while (i < rowSize && map[i][0] != -1)
