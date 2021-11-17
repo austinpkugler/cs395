@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+int max(int a, int b);
 int robotCoinCollection(int rowSize, int colSize, int map[rowSize][colSize]);
 void printTable(int rowSize, int colSize, int map[rowSize][colSize]);
 
@@ -53,71 +54,73 @@ int main(int argc, char *argv[])
    return 0;
 }
 
+// Returns the max of two ints.
+int max(int a, int b)
+{
+   return a > b ? a : b;
+}
+
 // Creates and prints the coin collection table.
 int robotCoinCollection(int rowSize, int colSize, int map[rowSize][colSize])
 {
    int navTable[rowSize][colSize];
    navTable[0][0] = map[0][0];
 
-   int i, j;
+   int i = 1, j = 1, k;
 
    // Do rows
-   for (i = 1; i < rowSize; i++)
+   while (i < rowSize && map[i][0] != -1)
    {
-      // Current position is a wall
-      if (map[i][0] == -1)
-      {
-         for (i = i; i < colSize; i++)
-         {
-            navTable[i][0] = 0;
-            printf("(%d, %d) set to 0\n", i, 0);
-         }
-      }
-      else
-      {
-         navTable[i][0] = navTable[i - 1][0] + map[i][0];
-      }
+      navTable[i][0] = navTable[i - 1][0] + map[i][0];
+      i = i + 1;
+   }
+
+   // A wall has been found
+   while (i < rowSize)
+   {
+      navTable[i][0] = -10;
+      i++;
    }
 
    // Do columns
-   for (j = 1; j < colSize; j++)
+   while (j < colSize && map[0][j] != -1)
    {
-      // Current position is a wall
-      if (map[0][j] == -1)
-      {
-         for (j = j; j < colSize; j++)
-         {
-            navTable[0][j] = 0;
-            printf("(%d, %d) set to 0\n", 0, j);
-         }
-      }
-      else
-      {
-         navTable[0][j] = navTable[0][j - 1] + map[0][j];
-      }
+      navTable[0][j] = navTable[0][j - 1] + map[0][j];
+      j = j + 1;
    }
 
-   // Navigate entire map
+   // A wall has been found
+   while (j < colSize)
+   {
+      navTable[0][j] = -10;
+      j++;
+   }
+
+   // Navigate map
    for (i = 1; i < rowSize; i++)
    {
       for (j = 1; j < colSize; j++)
       {
-         // Current position is a wall
-         if (map[i][j] == -1)
+         if (map[i][j] != -1)
          {
-            navTable[i][j] = 0;
-            printf("(%d, %d) set to 0\n", i, j);
+            navTable[i][j] = max(navTable[i - 1][j], navTable[i][j - 1]) + map[i][j];
          }
+         // A wall has been found
          else
          {
-            if (navTable[i - 1][j] > navTable[i][j - 1])
-            {
-               navTable[i][j] = navTable[i - 1][j] + map[i][j];
-            }
-            else
-            {
-               navTable[i][j] = navTable[i][j - 1] + map[i][j];
-            }
+            navTable[i][j] = -10;
+         }
+      }
+   }
+
+   // Reset negatives
+   for (i = 0; i < rowSize; i++)
+   {
+      for (j = 0; j < colSize; j++)
+      {
+         if (navTable[i][j] < 0)
+         {
+            navTable[i][j] = 0;
          }
       }
    }
